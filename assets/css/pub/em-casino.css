@@ -103,13 +103,14 @@
 
 /* info */
 .emcasino-info {
-	font-size: 3rem;
+	font-size: 2.6rem;
 	font-weight: 700;
 	flex: 1;
 	/*white-space: nowrap;*/
 	line-height: 1;
 	display: flex;
 	align-items: center;
+	margin-left: 1rem;
 }
 
 /* info-one */
