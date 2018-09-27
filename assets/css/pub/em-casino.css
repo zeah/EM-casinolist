@@ -101,7 +101,10 @@
 	font-size: 3rem;
 	font-weight: 700;
 	flex: 1;
-	white-space: nowrap;
+	/*white-space: nowrap;*/
+	line-height: 1;
+	display: flex;
+	align-items: center;
 }
 
 /* info-one */
