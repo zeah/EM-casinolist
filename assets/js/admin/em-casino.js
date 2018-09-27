@@ -1,6 +1,6 @@
 (() => {
 
-	// console.log(emcasinoer_data);
+	console.log(emcasinoer_data);
 
 	let newtype = '';
 
@@ -41,11 +41,11 @@
 		if (o.type != 'checkbox') {
 			if (!o.sort) input.setAttribute('value', (emcasinoer_data.meta[o.name] == undefined) ? '' : emcasinoer_data.meta[o.name]);
 			else {
-				let sort = emcasinoer_data.emcasino_sort;
+				let sort = emcasinoer_data.emcasinoer_sort;
 
 				if (o.sort != 'default') sort = emcasinoer_data['emcasinoer_sort_'+o.sort];
 
-				if (sort == undefined) sort = emcasinoer_data.emcasino_sort;
+				if (sort == undefined) sort = emcasinoer_data.emcasinoer_sort;
 
 				input.setAttribute('value', sort);
 			}
@@ -104,7 +104,7 @@
 		return container; 
 	}
 
-	let container_sort = newdiv({class: 'emcasino-sort-container'});
+	let container_sort = newdiv({class: 'emcasinoer-sort-container'});
 	container_sort.appendChild(newinput({
 		name: 'emcasinoer_sort', 
 		title: 'Sortering', 
