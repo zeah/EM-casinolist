@@ -1,11 +1,11 @@
 (() => {
 
-	console.log(emcasino_data);
+	// console.log(emcasinoer_data);
 
 	let newtype = '';
 
 	// meta box
-	let container = document.querySelector('.emcasino-meta-container');
+	let container = document.querySelector('.emcasinoer-meta-container');
 
 	// new div helper function
 	let newdiv = (o = {}) => {
@@ -28,9 +28,9 @@
 	let newinput = (o = {}) => {
 		if (!o.name) return document.createElement('div');
 
-		let container = newdiv({class: 'emcasino-input-container'});
+		let container = newdiv({class: 'emcasinoer-input-container'});
 
-		let title = newdiv({class: 'emcasino-input-title', text: o.title});
+		let title = newdiv({class: 'emcasinoer-input-title', text: o.title});
 		container.appendChild(title);
 
 		let input = document.createElement('input');
@@ -39,18 +39,18 @@
 		else input.setAttribute('type', o.type);
 
 		if (o.type != 'checkbox') {
-			if (!o.sort) input.setAttribute('value', (emcasino_data.meta[o.name] == undefined) ? '' : emcasino_data.meta[o.name]);
+			if (!o.sort) input.setAttribute('value', (emcasinoer_data.meta[o.name] == undefined) ? '' : emcasinoer_data.meta[o.name]);
 			else {
-				let sort = emcasino_data.emcasino_sort;
+				let sort = emcasinoer_data.emcasino_sort;
 
-				if (o.sort != 'default') sort = emcasino_data['emcasino_sort_'+o.sort];
+				if (o.sort != 'default') sort = emcasinoer_data['emcasinoer_sort_'+o.sort];
 
-				if (sort == undefined) sort = emcasino_data.emcasino_sort;
+				if (sort == undefined) sort = emcasinoer_data.emcasino_sort;
 
 				input.setAttribute('value', sort);
 			}
 		}
-		else if (emcasino_data.meta[o.name]) input.setAttribute('checked', '');
+		else if (emcasinoer_data.meta[o.name]) input.setAttribute('checked', '');
 		
 
 		if (o.step) input.setAttribute('step', parseFloat(o.step));
@@ -59,7 +59,7 @@
 
 
 
-		if (!o.notData) input.setAttribute('name', 'emcasino_data['+o.name+']');
+		if (!o.notData) input.setAttribute('name', 'emcasinoer_data['+o.name+']');
 		else input.setAttribute('name', o.name);
 
 		container.appendChild(input);
@@ -73,15 +73,15 @@
 		let container = document.createElement('div');
 
 		let input = document.createElement('select');
-		input.setAttribute('name', 'emcasino_data[terning]');
+		input.setAttribute('name', 'emcasinoer_data[terning]');
 
-		container.appendChild(newdiv({class: 'emcasino-input-title', text: 'Terningkast'}));
+		container.appendChild(newdiv({class: 'emcasinoer-input-title', text: 'Terningkast'}));
 
 		// helper function for creating option tag
 		let addOption = (o = {}) => {
 			let option = document.createElement('option');
 			option.setAttribute('value', o.value);
-			if (o.value == emcasino_data.meta.terning) option.setAttribute('selected', '');
+			if (o.value == emcasinoer_data.meta.terning) option.setAttribute('selected', '');
 			option.appendChild(document.createTextNode(o.value));
 			return option;
 		}
@@ -106,7 +106,7 @@
 
 	let container_sort = newdiv({class: 'emcasino-sort-container'});
 	container_sort.appendChild(newinput({
-		name: 'emcasino_sort', 
+		name: 'emcasinoer_sort', 
 		title: 'Sortering', 
 		notData: true, 
 		sort: 'default', 
@@ -116,9 +116,9 @@
 
 	container.appendChild(container_sort);
 
-	for (let sort of emcasino_data['tax'])
+	for (let sort of emcasinoer_data['tax'])
 		container_sort.appendChild(newinput({
-			name: 'emcasino_sort_'+sort, 
+			name: 'emcasinoer_sort_'+sort, 
 			title: 'Sortering '+sort.replace(/-/g, ' '), 
 			notData: true, 
 			sort: sort, 
@@ -133,7 +133,7 @@
 	container.appendChild(newinput({name: 'qstring', type: 'checkbox', title: 'Add query'}));
 	// container.appendChild(newinput({name: 'bestill_text', title: 'Bestill Text (under bestillknapp)'}));
 
-	let info_container = newdiv({class: 'emcasino-info-container'});
+	let info_container = newdiv({class: 'emcasinoer-info-container'});
 
 	info_container.appendChild(newinput({name: 'info01', title: 'Text 01'}));
 	info_container.appendChild(newinput({name: 'info02', title: 'Text 02'}));
@@ -151,14 +151,14 @@
 
 
 	// adding existing category
-	jQuery('#emcasinotypechecklist').on('change', function(e) {
+	jQuery('#emcasinoertypechecklist').on('change', function(e) {
 
 		let text = $(e.target).parent().text().trim().replace(/ /g, '-');
 
-		if (!e.target.checked) $("input[name='emcasino_sort_"+text+"']").parent().remove();
+		if (!e.target.checked) $("input[name='emcasinoer_sort_"+text+"']").parent().remove();
 		else {
 			let input = newinput({
-				name: 'emcasino_sort_'+text, 
+				name: 'emcasinoer_sort_'+text, 
 				title: 'Sortering '+text.replace(/-/g, ' '), 
 				notData: true, 
 				sort: text, 
@@ -167,21 +167,21 @@
 			});
 
 			// $("input[name='emcasino_sort']").parent().parent().append(input);
-			$('.emcasino-sort-container').append(input);
+			$('.emcasinoer-sort-container').append(input);
 		}
 	});
 
 	// reading name of new category for creating
-	jQuery('#newemcasinotype').on('input', function(e) { newtype = e.target.value; });
+	jQuery('#newemcasinoertype').on('input', function(e) { newtype = e.target.value; });
 
 	// creating category
-	jQuery('#emcasinotype-add-submit').click(function(e) {
+	jQuery('#emcasinoertype-add-submit').click(function(e) {
 		let text = newtype.trim().replace(/ /g, '-');
 		text = text.replace('ø', 'o');
 		text = text.replace('æ', 'ae');
 		text = text.replace('å', 'a');
-		let input = newinput({name: 'emcasino_sort_'+text, title: 'Sortering '+text.replace(/-/g, ' '), notData: true, sort: text, type: 'number'});
-		$('.emcasino-sort-container').append(input);
+		let input = newinput({name: 'emcasinoer_sort_'+text, title: 'Sortering '+text.replace(/-/g, ' '), notData: true, sort: text, type: 'number'});
+		$('.emcasinoer-sort-container').append(input);
 		// $("input[name='emcasino_sort']").parent().parent().append(input);
 	});
 

@@ -17,7 +17,7 @@ final class Casino_overview {
 	}
 
 	public function add_menu() {
-		add_submenu_page('edit.php?post_type=emcasino', 'Overview', 'Overview', 'manage_options', 'emcasino-overview', array($this, 'add_page'));
+		add_submenu_page('edit.php?post_type=emcasinoer', 'Overview', 'Overview', 'manage_options', 'emcasino-overview', array($this, 'add_page'));
 	}
 
 	public function add_page() {

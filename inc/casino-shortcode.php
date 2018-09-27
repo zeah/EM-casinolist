@@ -66,13 +66,13 @@ final class Casino_shortcode {
 		if (!is_array($atts)) $atts = [];
 
 		$args = [
-			'post_type' 		=> 'emcasino',
+			'post_type' 		=> 'emcasinoer',
 			'posts_per_page' 	=> -1,
 			'orderby'			=> [
 										'meta_value_num' => 'ASC',
 										'title' => 'ASC'
 								   ],
-			'meta_key'			=> 'emcasino_sort'.($atts['casino'] ? '_'.sanitize_text_field($atts['casino']) : '')
+			'meta_key'			=> 'emcasinoer_sort'.($atts['casino'] ? '_'.sanitize_text_field($atts['casino']) : '')
 		];
 
 
@@ -81,7 +81,7 @@ final class Casino_shortcode {
 		if ($type)
 			$args['tax_query'] = array(
 					array(
-						'taxonomy' => 'emcasinotype',
+						'taxonomy' => 'emcasinoertype',
 						'field' => 'slug',
 						'terms' => sanitize_text_field($type)
 					)
@@ -92,7 +92,7 @@ final class Casino_shortcode {
 		if (isset($atts['name'])) $names = explode(',', preg_replace('/ /', '', $atts['name']));
 		if ($names) $args['post_name__in'] = $names;
 		
-		$exclude = get_option('emcasino_exclude');
+		$exclude = get_option('emcasinoer_exclude');
 
 		if (is_array($exclude) && !empty($exclude)) $args['post__not_in'] = $exclude;
 
@@ -131,7 +131,7 @@ final class Casino_shortcode {
 		if (!isset($atts['name']) || $atts['name'] == '') return;
 
 		$args = [
-			'post_type' 		=> 'emcasino',
+			'post_type' 		=> 'emcasinoer',
 			'posts_per_page'	=> 1,
 			'name' 				=> sanitize_text_field($atts['name'])
 		];
@@ -144,7 +144,7 @@ final class Casino_shortcode {
 
 		add_action('wp_enqueue_scripts', array($this, 'add_css'));
 
-		$meta = get_post_meta($post[0]->ID, 'emcasino_data');
+		$meta = get_post_meta($post[0]->ID, 'emcasinoer_data');
 		if (isset($meta[0])) $meta = $meta[0];
 	
 
@@ -197,7 +197,7 @@ final class Casino_shortcode {
 		if (!isset($atts['name']) || $atts['name'] == '') return;
 
 		$args = [
-			'post_type' 		=> 'emcasino',
+			'post_type' 		=> 'emcasinoer',
 			'posts_per_page'	=> 1,
 			'name' 				=> sanitize_text_field($atts['name'])
 		];
@@ -205,7 +205,7 @@ final class Casino_shortcode {
 		$post = get_posts($args);
 		if (!is_array($post)) return;
 
-		$meta = get_post_meta($post[0]->ID, 'emcasino_data');
+		$meta = get_post_meta($post[0]->ID, 'emcasinoer_data');
 
 		if (!is_array($meta)) return;
 
@@ -272,7 +272,7 @@ final class Casino_shortcode {
 		foreach ($posts as $p) {
 			
 
-			$meta = get_post_meta($p->ID, 'emcasino_data');
+			$meta = get_post_meta($p->ID, 'emcasinoer_data');
 
 			// skip if no meta found
 			if (isset($meta[0])) $meta = $meta[0];
@@ -297,7 +297,7 @@ final class Casino_shortcode {
 			$html .= '<div class="emcasino-number">'.$nr.'</div>';
 			$nr++;
 
-			$html .= '<a target="_blank" rel="noopener" href="'.$meta['bestill'].'"><img class="emcasino-thumbnail" src="'.wp_kses_post(get_the_post_thumbnail_url($p,'post-thumbnail')).'"></a>';
+			$html .= '<a class="emcasino-thumbnail-link" target="_blank" rel="noopener" href="'.$meta['bestill'].'"><img class="emcasino-thumbnail" src="'.wp_kses_post(get_the_post_thumbnail_url($p,'post-thumbnail')).'"></a>';
 
 			if ($meta['info01'] || $meta['info02']) $html .= '<div class="emcasino-info-container">';
 			if ($meta['info01']) $html .= '<div class="emcasino-info emcasino-info-one">'.$meta['info01'].'</div>';
@@ -446,13 +446,13 @@ final class Casino_shortcode {
 	public function add_serp($data) {
 		global $post;
 
-		if ($post->post_type != 'emcasino') return $data;
+		if ($post->post_type != 'emcasinoer') return $data;
 
-		$exclude = get_option('emcasino_exclude');
+		$exclude = get_option('emcasinoer_exclude');
 		if (!is_array($exclude)) $exclude = [];
 		if (in_array($post->ID, $exclude)) return $data;
 
-		$exclude_serp = get_option('emcasino_exclude_serp');
+		$exclude_serp = get_option('emcasinoer_exclude_serp');
 		if (!is_array($exclude_serp)) $exclude_serp = [];
 		if (in_array($post->ID, $exclude_serp)) return $data;
 

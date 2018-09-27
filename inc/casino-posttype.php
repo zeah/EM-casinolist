@@ -51,7 +51,7 @@ final class Casino_posttype {
 			'labels'              => $labels,
 			'hierarchical'        => false,
 			'description'         => 'description',
-			'taxonomies'          => array('emcasinotype'),
+			'taxonomies'          => array('emcasinoertype'),
 			'public'              => false,
 			'show_ui'             => true,
 			'show_in_menu'        => true,
@@ -72,6 +72,6 @@ final class Casino_posttype {
 			),
 		);
 		
-		register_post_type('emcasino', $args);
+		register_post_type('emcasinoer', $args);
 	}
 }

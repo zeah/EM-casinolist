@@ -19,12 +19,12 @@ final class Casino_edit {
 	private function __construct() {
 
 
-		add_action('manage_emcasino_posts_columns', array($this, 'column_head'));
-		add_filter('manage_emcasino_posts_custom_column', array($this, 'custom_column'));
-		add_filter('manage_edit-emcasino_sortable_columns', array($this, 'sort_column'));
+		add_action('manage_emcasinoer_posts_columns', array($this, 'column_head'));
+		add_filter('manage_emcasinoer_posts_custom_column', array($this, 'custom_column'));
+		add_filter('manage_edit-emcasinoer_sortable_columns', array($this, 'sort_column'));
 		
 		/* metabox, javascript */
-		add_action('add_meta_boxes_emcasino', array($this, 'create_meta'));
+		add_action('add_meta_boxes_emcasinoer', array($this, 'create_meta'));
 		/* hook for page saving/updating */
 		add_action('save_post', array($this, 'save'));
 
@@ -39,9 +39,9 @@ final class Casino_edit {
 	 * @param [array] $data [array passing through theme filter]
 	 */
 	public function add_doc($data) {
-		$data['emcasino']['title'] = '<h1 id="emcasino">Lånlist (Plugin)</h1>';
+		$data['emcasinoer']['title'] = '<h1 id="emcasino">Lånlist (Plugin)</h1>';
 
-		$data['emcasino']['index'] = '<li><h2><a href="#emcasino">Lånlist (Plugin)</a></h2>
+		$data['emcasinoer']['index'] = '<li><h2><a href="#emcasino">Lånlist (Plugin)</a></h2>
 											<ul>
 												<li><a href="#emcasino-shortcode">Shortcode</a></li>
 												<li><a href="#emcasino-aldri">Aldri vis</a></li>
@@ -49,7 +49,7 @@ final class Casino_edit {
 												<li><a href="#emcasino-overview">Overview</a></li>
 											</ul>
 										</li>';
-		$data['emcasino']['info'] = '<li id="emcasino-shortcode"><h2>Shortcodes</h2>
+		$data['emcasinoer']['info'] = '<li id="emcasino-shortcode"><h2>Shortcodes</h2>
 										<ul>
 											<li><b>[lan]</b>
 											<p>[lan] will show all.</p>
@@ -102,7 +102,7 @@ final class Casino_edit {
 	 * @return [array]           [array going through wp filter]
 	 */
 	public function column_head($defaults) {
-		$defaults['emcasino_sort'] = 'Sorting Order';
+		$defaults['emcasinoer_sort'] = 'Sorting Order';
 		return $defaults;
 	}
 
@@ -121,12 +121,12 @@ final class Casino_edit {
 		
 		// echo print_r($q_out, true);
 
-		if ($column_name == 'emcasino_sort') {
+		if ($column_name == 'emcasinoer_sort') {
 			$q_out = null;
 			parse_str($_SERVER['QUERY_STRING'], $q_out);
 
-			$meta = 'emcasino_sort';
-			if (isset($q_out['emcasinotype'])) $meta = $meta.'_'.$q_out['emcasinotype'];
+			$meta = 'emcasinoer_sort';
+			if (isset($q_out['emcasinoertype'])) $meta = $meta.'_'.$q_out['emcasinoertype'];
 
 			$meta = get_post_meta($post->ID, $meta);
 			
@@ -142,7 +142,7 @@ final class Casino_edit {
 	 * @return [array]           [array going through wp filter]
 	 */
 	public function sort_column($columns) {
-		$columns['emcasino_sort'] = 'emcasino_sort';
+		$columns['emcasinoer_sort'] = 'emcasinoer_sort';
 		return $columns;
 	}
 
@@ -156,24 +156,24 @@ final class Casino_edit {
 
 		/* lan info meta */
 		add_meta_box(
-			'emcasino_meta', // name
+			'emcasinoer_meta', // name
 			'Lån Info', // title 
 			array($this,'create_meta_box'), // callback
-			'emcasino' // page
+			'emcasinoer' // page
 		);
 
 		/* to show or not on front-end */
 		add_meta_box(
-			'emcasino_exclude',
+			'emcasinoer_exclude',
 			'Aldri vis',
 			array($this, 'exclude_meta_box'),
-			'emcasino',
+			'emcasinoer',
 			'side'
 		);
 		
 		/* adding admin css and js */
-		wp_enqueue_style('em-emcasino-admin-style', EM_CASINO_PLUGIN_URL . 'assets/css/admin/em-casino.css', array(), '1.0.2');
-		wp_enqueue_script('em-emcasino-admin', EM_CASINO_PLUGIN_URL . 'assets/js/admin/em-casino.js', array(), '1.0.3', true);
+		wp_enqueue_style('em-emcasinoer-admin-style', EM_CASINO_PLUGIN_URL . 'assets/css/admin/em-casino.css', array(), '1.0.5');
+		wp_enqueue_script('em-emcasinoer-admin', EM_CASINO_PLUGIN_URL . 'assets/js/admin/em-casino.js', array(), '1.0.5', true);
 	}
 
 
@@ -181,12 +181,12 @@ final class Casino_edit {
 		creates content in metabox
 	*/
 	public function create_meta_box($post) {
-		wp_nonce_field('em'.basename(__FILE__), 'emcasino_nonce');
+		wp_nonce_field('em'.basename(__FILE__), 'emcasinoer_nonce');
 
-		$meta = get_post_meta($post->ID, 'emcasino_data');
-		$sort = get_post_meta($post->ID, 'emcasino_sort');
+		$meta = get_post_meta($post->ID, 'emcasinoer_data');
+		$sort = get_post_meta($post->ID, 'emcasinoer_sort');
 
-		$tax = wp_get_post_terms($post->ID, 'emcasinotype');
+		$tax = wp_get_post_terms($post->ID, 'emcasinoertype');
 
 		$taxes = [];
 		if (is_array($tax))
@@ -196,18 +196,18 @@ final class Casino_edit {
 		$json = [
 			'meta' => isset($meta[0]) ? $meta[0] : '',
 			'meta' => isset($meta[0]) ? $this->sanitize($meta[0]) : '',
-			'emcasino_sort' => isset($sort[0]) ? floatval($sort[0]) : '',
+			'emcasinoer_sort' => isset($sort[0]) ? floatval($sort[0]) : '',
 			'tax' => $taxes
 		];
 
 		$ameta = get_post_meta($post->ID);
 		foreach($ameta as $key => $value)
-			if (strpos($key, 'emcasino_sort_') !== false && isset($value[0])) $json[$key] = esc_html($value[0]);
+			if (strpos($key, 'emcasinoer_sort_') !== false && isset($value[0])) $json[$key] = esc_html($value[0]);
 
 		// wp_die('<xmp>'.print_r($_POST, true).'</xmp>');
 
-		wp_localize_script('em-emcasino-admin', 'emcasino_data', json_decode(json_encode($json), true));
-		echo '<div class="emcasino-meta-container"></div>';
+		wp_localize_script('em-emcasinoer-admin', 'emcasinoer_data', json_decode(json_encode($json), true));
+		echo '<div class="emcasinoer-meta-container"></div>';
 	}
  
 
@@ -217,16 +217,16 @@ final class Casino_edit {
 	public function exclude_meta_box() {
 		global $post;
 
-		$exclude = get_option('emcasino_exclude');
+		$exclude = get_option('emcasinoer_exclude');
 		if (!is_array($exclude)) $exclude = [];
 
 
-		$exclude_serp = get_option('emcasino_exclude_serp');
+		$exclude_serp = get_option('emcasinoer_exclude_serp');
 		if (!is_array($exclude_serp)) $exclude_serp = [];
 
 
-		echo '<p><input name="emcasino_exclude" id="emcasino_exc" type="checkbox"'.(array_search($post->ID, $exclude) !== false ? ' checked' : '').'><label for="emcasino_exc">Lån vil ikke vises på front-end når boksen er markert.</label></p>
-		      <p><input name="emcasino_exclude_serp" id="emcasino_exc_serp" type="checkbox"'.(array_search($post->ID, $exclude_serp) !== false ? ' checked' : '').'><label for="emcasino_exc_serp">Ikke vis i internal SERP.</label></p>';
+		echo '<p><input name="emcasinoer_exclude" id="emcasinoer_exc" type="checkbox"'.(array_search($post->ID, $exclude) !== false ? ' checked' : '').'><label for="emcasino_exc">Lån vil ikke vises på front-end når boksen er markert.</label></p>
+		      <p><input name="emcasinoer_exclude_serp" id="emcasinoer_exc_serp" type="checkbox"'.(array_search($post->ID, $exclude_serp) !== false ? ' checked' : '').'><label for="emcasino_exc_serp">Ikke vis i internal SERP.</label></p>';
 	}
 
 
@@ -238,7 +238,7 @@ final class Casino_edit {
 		// wp_die('<xmp>'.print_r($_POST, true).'</xmp>');
 		
 		// post type is emcasino
-		if (!get_post_type($post_id) == 'emcasino') return;
+		if (!get_post_type($post_id) == 'emcasinoer') return;
 
 		// is on admin screen
 		if (!is_admin()) return;
@@ -247,15 +247,15 @@ final class Casino_edit {
 		if (!current_user_can('edit_posts')) return;
 
 		// nonce is sent
-		if (!isset($_POST['emcasino_nonce'])) return;
+		if (!isset($_POST['emcasinoer_nonce'])) return;
 
 		// nonce is checked
-		if (!wp_verify_nonce($_POST['emcasino_nonce'], 'em'.basename(__FILE__))) return;
+		if (!wp_verify_nonce($_POST['emcasinoer_nonce'], 'em'.basename(__FILE__))) return;
 
 		// saves to wp option instead of post meta
 		// when adding
-		$this->u_option('emcasino_exclude', $post_id);
-		$this->u_option('emcasino_exclude_serp', $post_id);
+		$this->u_option('emcasinoer_exclude', $post_id);
+		$this->u_option('emcasinoer_exclude_serp', $post_id);
 		// if (isset($_POST['emcasino_exclude'])) {
 		// 	$option = get_option('emcasino_exclude');
 
@@ -288,12 +288,12 @@ final class Casino_edit {
 
 		// data is sent, then sanitized and saved
 		// if (isset($_POST['emcasino_data'])) update_post_meta($post_id, 'emcasino_data', $_POST['emcasino_data']);
-		if (isset($_POST['emcasino_data'])) update_post_meta($post_id, 'emcasino_data', $this->sanitize($_POST['emcasino_data']));
-		if (isset($_POST['emcasino_sort'])) update_post_meta($post_id, 'emcasino_sort', floatval($_POST['emcasino_sort']));
+		if (isset($_POST['emcasinoer_data'])) update_post_meta($post_id, 'emcasinoer_data', $this->sanitize($_POST['emcasinoer_data']));
+		if (isset($_POST['emcasinoer_sort'])) update_post_meta($post_id, 'emcasinoer_sort', floatval($_POST['emcasinoer_sort']));
 
 		// saving emcasino_sort_***
 		foreach($_POST as $key => $po) {
-			if (strpos($key, 'emcasino_sort_') !== false)
+			if (strpos($key, 'emcasinoer_sort_') !== false)
 				update_post_meta($post_id, sanitize_text_field(str_replace(' ', '', $key)), floatval($po));
 		}
 

@@ -56,6 +56,6 @@ final class Casino_taxonomy {
 			'capabilities'      => array(),
 		);
 	
-		register_taxonomy('emcasinotype', 'emcasino', $args );
+		register_taxonomy('emcasinoertype', 'emcasinoer', $args );
 	}
 }

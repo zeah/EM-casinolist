@@ -1,18 +1,18 @@
-.emcasino-sort-container {
+.emcasinoer-sort-container {
 	display: flex;
 	flex-wrap: wrap;
 }
 
-.emcasino-meta-container input {
+.emcasinoer-meta-container input {
 	width: 300px;
 	margin: 0 10px 10px 0;
 }
 
-.emcasino-sort-container input {
+.emcasinoer-sort-container input {
 	/*width: 150px;*/
 }
 
-.emcasino-info-container {
+.emcasinoer-info-container {
 	display: flex;
 	flex-wrap: wrap;
 	width: 650px;
@@ -21,27 +21,27 @@
 	/*grid-template-columns: 1fr 1fr;*/
 }
 
-.emcasino-info-container .emcasino-input-container {
+.emcasinoer-info-container .emcasinoer-input-container {
 	/*width: 40%;*/
 }
 
-.emcasino-info-container .emcasino-input-container:nth-child(3),
-.emcasino-info-container .emcasino-input-container:nth-child(7) {
+.emcasinoer-info-container .emcasinoer-input-container:nth-child(3),
+.emcasinoer-info-container .emcasinoer-input-container:nth-child(7) {
 	margin-bottom: 25px;
 }
 
-.emcasino-info-container .emcasino-input-container:nth-child(3)::after {
+.emcasinoer-info-container .emcasinoer-input-container:nth-child(3)::after {
 	content: '';
 	width: 300px;
 	display: inline-block;
 	/*height: 4rem;*/
 }
 
-.emcasino-input-title {
+.emcasinoer-input-title {
 	font-size: 16px;
 }
 
-.emcasino-input-container input[type=checkbox]{
+.emcasinoer-input-container input[type=checkbox]{
 	width: auto;
 }
 

@@ -1,0 +1,192 @@
+/**
+ *
+ * INDEX
+ *
+ *	.emcasino-container 	#	ul element
+ * 
+ *  .emcasino-listitem		#	li element
+ *  	|	.emcasino-row		#	grid
+ * 	|	|	.emcasino-number
+ * 	|	|	.emcasino-thumbnail-link
+ * 	|	|	|	.emcasino-thumbnail
+ * 	|	|	.emcasino-info-container
+ * 	|	|	|	.emcasino-info (.emcasino-info-one, .emcasino-info-two)
+ * 	|	|	.emcasino-buttons
+ * 	|	|	|	.emcasino-bestill
+ * 	|	|	|	.emcasino-readmore
+ *
+ *
+ * media rule: 2 listitem per row
+ *
+ * media rule: internet explorer
+ */
+
+.emcasino-container {
+	padding: 0;
+	margin: 0;
+	user-select: none;
+}
+
+/* li element - container for grid and tracking pixel */
+.emcasino-listitem {
+	list-style: none;
+	margin-bottom: 1rem;
+	background-color: hsl(0, 70%, 99%);
+
+	border-top: solid 2px #bbb;
+	border-bottom: solid 2px #bbb;
+	overflow: hidden;
+}
+
+.emcasino-listitem:nth-child(odd) {
+	background-color: hsl(240, 70%, 98%);
+}
+
+/* grid */
+.emcasino-row {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	padding: 2rem;
+
+	height: 100%;
+}
+
+/* numbering in the list */
+.emcasino-number {
+	align-self: flex-start;
+
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	width: 4rem;
+	height: 4rem;
+
+	border-bottom-right-radius: 25%;
+
+	text-align: center;
+	line-height: 4rem;
+
+	background-color: hsl(120, 80%, 40%);
+
+	font-size: 2.6rem;
+	color: #fff;
+	text-shadow: -1px 0 1px black, 0 1px 1px black, 1px 0 1px black, 0 -1px 1px black;
+
+}
+
+/* logo container */
+.emcasino-thumbnail-link {
+	align-self: stretch;
+	text-align: center;
+}
+
+.emcasino-thumbnail {
+	width: 80%;
+	height: auto;
+}
+
+/* info container */
+.emcasino-info-container {
+	margin: 2rem 0;
+	margin-bottom: auto;
+}
+
+/* info element */
+.emcasino-info {
+	font-size: 3rem;
+	font-weight: 700;
+	flex: 1;
+	text-align: center;
+	white-space: nowrap;
+
+	margin: 1rem;
+}
+
+/* info-one */
+.emcasino-info-one {
+	color: hsl(240, 100%, 40%);
+}
+
+/* info-two */
+.emcasino-info-two {
+	color: hsl(300, 100%, 30%);
+}
+
+/* buttons container */
+.emcasino-buttons {
+	display: flex;
+	align-self: stretch;
+	flex-direction: row-reverse;
+	justify-content: space-around;
+}
+
+/* link element */
+.emcasino-link {
+	padding: 1rem 2rem;
+	
+	font-size: 2.4rem;
+	font-weight: 700;
+
+	text-decoration: none;
+	text-shadow: -1px 0 1px black, 0 1px 1px black, 1px 0 1px black, 0 -1px 1px black;
+	color: #fff;
+
+	border-radius: 5px;
+
+	white-space: nowrap;
+
+}
+
+/* play now link */
+.emcasino-playnow {
+	background-color: #3c3;
+}
+.emcasino-playnow:hover {
+	background-color: #55ee55;
+}
+
+/* read more link */
+.emcasino-readmore {
+	background-color: #acc;
+}	
+.emcasino-readmore:hover {
+	background-color: #cee;
+}	
+
+
+/* double list */
+@media only screen and (min-width: 615px) {
+	.emcasino-container {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-gap: 1rem;
+
+		margin: 1rem;
+	}
+
+	.emcasino-listitem {
+		border: solid 2px #ddd;
+	}
+
+	.emcasino-info {
+		white-space: pre-wrap;
+		font-size: 2.2rem;
+	}
+
+	.emcasino-thumbnail {
+		width: auto;
+		height: 6rem;
+	}
+
+	.emcasino-link {
+		font-size: 1.8rem;
+	}
+}
+
+/* internet explorer */
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+}
