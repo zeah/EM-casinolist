@@ -2,7 +2,7 @@
 /*
 Plugin Name: EM Casino
 Description: liste over kasino
-Version: 1.0.2
+Version: 1.0.3
 GitHub Plugin URI: zeah/EM-casinolist
 */
 
