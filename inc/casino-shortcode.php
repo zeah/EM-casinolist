@@ -273,8 +273,8 @@ final class Casino_shortcode {
 
 		foreach ($posts as $p) {
 			
-			$small = true;
-			if (array_search('small', $atts)) $small = true;
+			$small = false;
+			if (array_search('small', $atts) !== false) $small = true;
 
 			$meta = get_post_meta($p->ID, 'emcasinoer_data');
 
