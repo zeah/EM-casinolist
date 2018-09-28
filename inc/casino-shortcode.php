@@ -252,7 +252,7 @@ final class Casino_shortcode {
 	 * adding sands to head
 	 */
 	public function add_css() {
-        wp_enqueue_style('emcasino-style', EM_CASINO_PLUGIN_URL.'assets/css/pub/em-casino.css', array(), '1.0.1', '(min-width: 816px)');
+        wp_enqueue_style('emcasino-style', EM_CASINO_PLUGIN_URL.'assets/css/pub/em-casino.css', array(), '1.0.2', '(min-width: 816px)');
         wp_enqueue_style('emcasino-mobile', EM_CASINO_PLUGIN_URL.'assets/css/pub/em-casino-mobile.css', array(), '1.0.1', '(max-width: 815px)');
 	}
 
@@ -269,8 +269,12 @@ final class Casino_shortcode {
 
 		$nr = 1;
 
+		if (!is_array($atts)) $atts = [];
+
 		foreach ($posts as $p) {
 			
+			$small = true;
+			if (array_search('small', $atts)) $small = true;
 
 			$meta = get_post_meta($p->ID, 'emcasinoer_data');
 
@@ -299,7 +303,7 @@ final class Casino_shortcode {
 
 			$html .= '<a class="emcasino-thumbnail-link" target="_blank" rel="noopener" href="'.$meta['bestill'].'"><img class="emcasino-thumbnail" src="'.wp_kses_post(get_the_post_thumbnail_url($p,'post-thumbnail')).'"></a>';
 
-			if ($meta['info01'] || $meta['info02']) $html .= '<div class="emcasino-info-container">';
+			if ($meta['info01'] || $meta['info02']) $html .= sprintf('<div class="emcasino-info-container%s">', $small ? ' emcasino-info-container-small' : '');
 			if ($meta['info01']) $html .= '<div class="emcasino-info emcasino-info-one">'.$meta['info01'].'</div>';
 			if ($meta['info02']) $html .= '<div class="emcasino-info emcasino-info-two">'.$meta['info02'].'</div>';
 			if ($meta['info01'] || $meta['info02']) $html .= '</div>';
