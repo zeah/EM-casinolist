@@ -51,43 +51,44 @@ final class Casino_edit {
 										</li>';
 		$data['emcasinoer']['info'] = '<li id="emcasino-shortcode"><h2>Shortcodes</h2>
 										<ul>
-											<li><b>[lan]</b>
-											<p>[lan] will show all.</p>
+											<li><b>[casino]</b>
+											<p>[casino] will show all.</p>
 											</li>
-											<li><b>[lan name="xx, yy"]</b>
-											<p>Shows only the loans that is mentioned in the shortcode.
-											<br>The name needs to be the slug-name of the loan.
-											<br>Loans are sorted by the position they have in name=""
-											<br>eks.: [lan name="lendo-privatlan"] will only show the loan with slug-name "lendo-privatlån.
-											<br>[lan name="lendo-privatlan, axo-finans"] will show 2 loans: lendo and axo.</p>
-											<li><b>[lan lan="xx"]</b>
-											<p>lan must match the slug-name of the lan type.
-											<br>The loans are sorted by the sort order given in load edit page for that type.
-											<br>Eks: [lan lan="frontpage"] shows all loans with the category "frontpage" in the order of lowest number
+											<li><b>[casino name="xx, yy"]</b>
+											<p>Shows only the casinos that is mentioned in the shortcode.
+											<br>The name needs to be the slug-name of the casino.
+											<br>Casinos are sorted by the position they have in name=""
+											<br>eks.: [casino name="yyy"] will only show the casino with slug-name "lendo-privatlån.
+											<br>[casino name="lendo-privatlan, axo-finans"] will show 2 casinos: lendo and axo.</p>
+											<li><b>[casino casino="xx"]</b>
+											<p>casino must match the slug-name of the casino type.
+											<br>The casinos are sorted by the sort order given in load edit page for that type.
+											<br>Eks: [casino casino="frontpage"] shows all casinos with the category "frontpage" in the order of lowest number
 											<br>of field "Sort frontpage" has in the load editor page.</p>
 											</li>
 											</li>
-											<li><b>[lan-bilde name="xx"]</b>
-											<p>Name is required. Will show the loan\'s thumbnail with a link.
-											<br>[kredittkort-bestlil name="xx" source="test"] will append &source=test at the link.</p></li>
-											<li><b>[lan-bestill name="xx"]</b>
-											<p>Name is required. Will show the loan\'s button.
-											<br>[kredittkort-bestlil name="xx" source="test"] will append &source=test at the link.</p></li>
+											<li><b>[casino-bilde name="xx"]</b>
+											<p>Name is required. Will show the casino\'s thumbnail with a link.
+											<br>[kredittkort-bestill name="xx" source="test"] will append &source=test at the link.</p></li>
+											<li><b>[casino-bestill name="xx"] [casino-bestill name="xx" width="yy"]</b>
+											<p>Name is required. Will show the casino\'s button.
+											<br>casino-bestill shortcode also accepts width attribute. Can use px, rem or %.
+											<br>[casino-bestill name="xx" source="test"] will append &source=test at the link (if activated.)</p></li>
 											
 										</ul>
 										</li>
 										<li id="emcasino-aldri"><h2>Aldri vis</h2>
-										<p>If tagged, then the loan will never appear on the front-end.</p>
+										<p>If tagged, then the casino will never appear on the front-end.</p>
 										</li>
 										</li>
 										<li id="emcasino-sort"><h2>Sorting order</h2>
-										<p>The loans will be shown with the lowest "Sort"-value first.
-										<br>When only showing a specific category on loan page, then the sort order column will reflect 
+										<p>The casinos will be shown with the lowest "Sort"-value first.
+										<br>When only showing a specific category on casino page, then the sort order column will reflect 
 										<br>that category\'s sort order.</p>
 										</li>
 										<li id="emcasino-overview"><h2>Overview</h2>
 										<p> The <a target="_blank" href="'.get_site_url().'/wp-admin/edit.php?post_type=emcasino&page=emcasino-overview">overview page</a> will show every post and page and whether or not there are
-										<br>any lan shortcodes in them.
+										<br>any casino shortcodes in them.
 										<br>You can sort the columns alphabetically</p>
 										</li>
 										';

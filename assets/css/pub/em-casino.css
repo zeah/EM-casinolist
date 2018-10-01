@@ -159,6 +159,25 @@
 	background-color: #55ee55;
 }
 
+.emcasino-playnow-solo-container {
+	display: flex;
+	justify-content: center;
+
+	margin: 2rem 0 4rem;
+}
+
+.emcasino-playnow-solo {
+	/*display: block;*/
+	background-color: #3c3;
+	font-family: "Segoe UI";
+	font-weight: 500;
+
+	flex-basis: 80%;
+
+	text-align: center;
+	/*max-width: 80%;*/
+}
+
 /* read more link */
 .emcasino-readmore {
 	background-color: #acc;
