@@ -328,7 +328,7 @@ final class Casino_shortcode {
 
 			if ($meta['bestill'] || $meta['readmore']) $html .= '<div class="emcasino-buttons">';
 			if ($meta['bestill']) $html .= '<a class="emcasino-link emcasino-playnow" target="_blank" rel=noopener href="'.esc_url($meta['bestill']).'">Spill Nå</a>';
-			if ($meta['readmore']) $html .= '<a class="emcasino-link emcasino-readmore" target="_blank" rel=noopener href="'.esc_url($meta['readmore']).'">Les Mer</a>';
+			if ($meta['readmore']) $html .= '<a class="emcasino-link emcasino-readmore" href="'.esc_url($meta['readmore']).'">Les Mer</a>';
 			if ($meta['bestill'] || $meta['readmore']) $html .= '</div>';
 
 			// if ($meta['bestill']) $html .= '<div class="emcasino-fatilbud"><a class="emcasino-lenke emcasino-lenke-fatilbud" target="_blank" rel=noopener href="'.esc_url($meta['bestill']).'">Få Tilbud Nå</a></div>';
