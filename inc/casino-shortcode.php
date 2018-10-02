@@ -269,8 +269,8 @@ final class Casino_shortcode {
 	 * adding sands to head
 	 */
 	public function add_css() {
-        wp_enqueue_style('emcasino-style', EM_CASINO_PLUGIN_URL.'assets/css/pub/em-casino.css', array(), '1.0.2', '(min-width: 816px)');
-        wp_enqueue_style('emcasino-mobile', EM_CASINO_PLUGIN_URL.'assets/css/pub/em-casino-mobile.css', array(), '1.0.1', '(max-width: 815px)');
+        wp_enqueue_style('emcasino-style', EM_CASINO_PLUGIN_URL.'assets/css/pub/em-casino.css', array(), '1.0.3', '(min-width: 816px)');
+        wp_enqueue_style('emcasino-mobile', EM_CASINO_PLUGIN_URL.'assets/css/pub/em-casino-mobile.css', array(), '1.0.2', '(max-width: 815px)');
 	}
 
 
