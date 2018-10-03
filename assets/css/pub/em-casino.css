@@ -52,8 +52,8 @@
 	justify-items: space-between;
 	font-family: "Segoe UI";
 
-	padding: 1rem;
-	padding-left: 0;
+	/*padding: 0 1.5rem 0 0;*/
+	padding-right: 1.5rem;
 	height: 8rem;
 
 	box-sizing: border-box;
@@ -134,7 +134,7 @@
 
 /* buttons container */
 .emcasino-buttons {
-	text-align: right;
+	/*text-align: right;*/
 }
 
 /* play now and read more link */
